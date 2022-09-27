@@ -10,14 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * AuthenticationHeaderWriterHandler set the response header by taking them from the
- * AuthenticationEvent attribute of the response (if it exist).
+ * AuthenticationHeaderWriterHandler set the response header
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1-SNAPSHOT
  * @since 18 09 2022
  */
 public class AuthenticationHeaderWriterHandler implements HandlerInterceptor {
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Set the header of the response by taking them from the
+     * AuthenticationEvent attribute of the response (if it exist).
+     */
     @Override
     public boolean preHandle(
             HttpServletRequest request,
@@ -27,12 +32,14 @@ public class AuthenticationHeaderWriterHandler implements HandlerInterceptor {
 
         if (auth == null) return true;
 
-        auth.getResponseHeader().forEach(response::addHeader);
+        auth.getAuthenticationResponseHeader().forEach(response::addHeader);
 
         return true;
     }
 
     /**
+     * {@inheritDoc}
+     * <p>
      * remove the user from securityContext
      */
     @Override

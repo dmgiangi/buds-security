@@ -8,7 +8,7 @@ import java.util.Collection;
  * and its authorities through the application layer
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1-SNAPSHOT
  * @since 19 09 2022
  */
 public interface SecurityUser extends Serializable {
@@ -47,14 +47,14 @@ public interface SecurityUser extends Serializable {
      *
      * @return the boolean
      */
-    boolean isAccountNonExpired();
+    boolean isAccountNotExpired();
 
     /**
      * Is account not locked boolean.
      *
      * @return the boolean
      */
-    boolean isAccountNonLocked();
+    boolean isAccountNotLocked();
 
     /**
      * Is credentials non expired boolean.

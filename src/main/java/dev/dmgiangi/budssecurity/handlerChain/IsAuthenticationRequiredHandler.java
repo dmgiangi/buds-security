@@ -21,12 +21,15 @@ import javax.servlet.http.HttpServletResponse;
  * 2. an instance of the method handler
  *
  * @author Gianluigi De Marco
- * @version 0.2
+ * @version 0.1-SNAPSHOT
  * @since 27 09 2022
  */
 public class IsAuthenticationRequiredHandler implements HandlerInterceptor {
     private static final Logger log = LoggerFactory.getLogger(IsAuthenticationRequiredHandler.class);
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean preHandle(
             HttpServletRequest request,
@@ -78,6 +81,8 @@ public class IsAuthenticationRequiredHandler implements HandlerInterceptor {
     }
 
     /**
+     * {@inheritDoc}
+     * <p>
      * remove the user from securityContext
      */
     @Override
