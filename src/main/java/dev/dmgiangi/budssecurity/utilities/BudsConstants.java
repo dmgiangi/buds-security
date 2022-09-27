@@ -46,7 +46,7 @@ public class BudsConstants {
         jwtRefreshHourDuration = env.getProperty(
                 "buds.jwt.jwtRefreshHourDuration",
                 Integer.class,
-                365*24);
+                8760); //8760 correspond to 1 year
 
         jwtBearerHourDuration = env.getProperty(
                 "buds.jwt.jwtRefreshHourDuration",
