@@ -31,17 +31,13 @@ public class AuthenticationFailedEvent implements AuthenticationEvent {
         return user;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public Map<String, String> getAuthenticationResponseHeader() {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isAuthenticated() {
         return false;

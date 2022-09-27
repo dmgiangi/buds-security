@@ -23,7 +23,7 @@ public interface AuthenticationEvent {
     /**
      * get headers, inherent to authentication, that will be added to response
      *
-     * @return a {@link java.util.Map}<String, String>
+     * @return a {@link java.util.Map} object
      */
     Map<String, String> getAuthenticationResponseHeader();
 
