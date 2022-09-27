@@ -1,5 +1,7 @@
 package dev.dmgiangi.budssecurity.authentication.events;
 
+import java.util.Map;
+
 /**
  * The AuthenticationEvent Hold a final instance of SecurityUser
  * and a map with header that will be added in the response
@@ -9,4 +11,5 @@ package dev.dmgiangi.budssecurity.authentication.events;
  * @since 27 09 2022
  */
 public interface AuthenticationEvent {
+    Map<String,String> getResponseHeader();
 }

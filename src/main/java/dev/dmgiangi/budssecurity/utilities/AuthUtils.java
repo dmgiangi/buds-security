@@ -14,4 +14,9 @@ public class AuthUtils {
     public static void setNotFoundOn(HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
+
+    public static void setIsAuthenticationRequiredOn(HttpServletResponse response) {
+        response.setHeader(Constants.WWW_AUTHENTICATE, "Basic realm='" + BudsConstants.realm() + "'");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+    }
 }
