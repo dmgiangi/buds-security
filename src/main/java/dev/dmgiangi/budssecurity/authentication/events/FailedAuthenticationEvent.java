@@ -8,36 +8,37 @@ import java.util.Map;
  * AuthenticationFailedEvent represent a failed Authentication
  *
  * @author Gianluigi De Marco
- * @version 0.1-SNAPSHOT
+ * @version 0.1
  * @since 27 09 2022
  */
-public class AuthenticationFailedEvent implements AuthenticationEvent {
-    private final SecurityUser user;
-
+public record FailedAuthenticationEvent(SecurityUser<?> user) implements AuthenticationEvent {
     /**
      * Constructor for AuthenticationFailedEvent.
      *
-     * @param user a {@link dev.dmgiangi.budssecurity.securitycontext.SecurityUser}
+     * @param user a {@link SecurityUser}
      */
-    public AuthenticationFailedEvent(SecurityUser user) {
-        this.user = user;
+    public FailedAuthenticationEvent {
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public SecurityUser getUser() {
+    public SecurityUser<?> user() {
         return user;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<String, String> getAuthenticationResponseHeader() {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isAuthenticated() {
         return false;

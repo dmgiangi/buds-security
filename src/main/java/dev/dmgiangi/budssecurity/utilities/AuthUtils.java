@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * in order to obtain cleaner code
  *
  * @author Gianluigi De Marco
- * @version 0.1-SNAPSHOT
+ * @version 0.1
  * @since 27 09 2022
  */
 public class AuthUtils {
@@ -42,6 +42,6 @@ public class AuthUtils {
      */
     public static void setSuccessfulAuthOn(HttpServletRequest request, AuthenticationEvent auth) {
         request.setAttribute(Constants.AUTHENTICATION_ATTRIBUTE, auth);
-        SecurityContext.setUser(auth.getUser());
+        SecurityContext.setUser(auth.user());
     }
 }

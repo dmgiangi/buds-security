@@ -8,16 +8,16 @@ import java.util.Collection;
  * and its authorities through the application layer
  *
  * @author Gianluigi De Marco
- * @version 0.1-SNAPSHOT
+ * @version 0.1
  * @since 19 09 2022
  */
-public interface SecurityUser extends Serializable {
+public interface SecurityUser<T> extends Serializable {
     /**
      * Gets main identifier usually the id of the user
      *
      * @return the main identifier
      */
-    String getMainIdentifier();
+    T getMainIdentifier();
 
     /**
      * Gets password of the user
@@ -69,4 +69,8 @@ public interface SecurityUser extends Serializable {
      * @return the boolean
      */
     boolean isVerified();
+
+    default boolean compareMainIdentifierWith(Object otherElement) {
+        return this.getMainIdentifier().equals(otherElement);
+    }
 }

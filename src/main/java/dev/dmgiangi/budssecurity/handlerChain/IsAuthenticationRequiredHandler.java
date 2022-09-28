@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * 2. an instance of the method handler
  *
  * @author Gianluigi De Marco
- * @version 0.1-SNAPSHOT
+ * @version 0.1
  * @since 27 09 2022
  */
 public class IsAuthenticationRequiredHandler implements HandlerInterceptor {

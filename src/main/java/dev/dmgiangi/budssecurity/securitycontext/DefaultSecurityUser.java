@@ -8,11 +8,11 @@ import java.util.Collection;
  * It can be overridden by
  *
  * @author Gianluigi De Marco
- * @version 0.1-SNAPSHOT
+ * @version 0.1
  * @since 22 09 2022
  */
-public class DefaultSecurityUser implements SecurityUser {
-    private String mainIdentifier;
+public class DefaultSecurityUser<T> implements SecurityUser<T> {
+    private T mainIdentifier;
     private String password;
     private Collection<String> authorities;
     private Collection<String> identifiers;
@@ -34,7 +34,7 @@ public class DefaultSecurityUser implements SecurityUser {
      * @param verified              the verified
      */
     public DefaultSecurityUser(
-            String mainIdentifier,
+            T mainIdentifier,
             String password,
             Collection<String> authorities,
             Collection<String> identifiers,
@@ -62,7 +62,7 @@ public class DefaultSecurityUser implements SecurityUser {
      * {@inheritDoc}
      */
     @Override
-    public String getMainIdentifier() {
+    public T getMainIdentifier() {
         return mainIdentifier;
     }
 

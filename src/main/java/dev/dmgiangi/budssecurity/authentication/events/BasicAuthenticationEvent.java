@@ -9,19 +9,19 @@ import java.util.Map;
  * BasicAuthenticationEvent represents a successful basic authentication
  *
  * @author Gianluigi De Marco
- * @version 0.1-SNAPSHOT
+ * @version 0.1
  * @since 28 09 2022
  */
-public class BasicAuthenticationEvent implements AuthenticationEvent {
+public class BasicAuthenticationEvent implements SuccessfulAuthenticationEvent {
     private final Map<String, String> authenticationResponseHeader = new HashMap<>();
-    private final SecurityUser securityUser;
+    private final SecurityUser<?> securityUser;
 
     /**
      * Constructor for BasicAuthenticationEvent.
      *
      * @param securityUser a {@link dev.dmgiangi.budssecurity.securitycontext.SecurityUser} object
      */
-    public BasicAuthenticationEvent(SecurityUser securityUser) {
+    public BasicAuthenticationEvent(SecurityUser<?> securityUser) {
         this.securityUser = securityUser;
     }
 
@@ -29,7 +29,7 @@ public class BasicAuthenticationEvent implements AuthenticationEvent {
      * {@inheritDoc}
      */
     @Override
-    public SecurityUser getUser() {
+    public SecurityUser<?> user() {
         return securityUser;
     }
 

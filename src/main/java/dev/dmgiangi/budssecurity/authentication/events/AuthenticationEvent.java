@@ -9,7 +9,7 @@ import java.util.Map;
  * and a map with header that will be added in the response
  *
  * @author Gianluigi De Marco
- * @version 0.1-SNAPSHOT
+ * @version 0.1
  * @since 27 09 2022
  */
 public interface AuthenticationEvent {
@@ -18,7 +18,7 @@ public interface AuthenticationEvent {
      *
      * @return a {@link dev.dmgiangi.budssecurity.securitycontext.SecurityUser}
      */
-    SecurityUser getUser();
+    SecurityUser<?> user();
 
     /**
      * get headers, inherent to authentication, that will be added to response

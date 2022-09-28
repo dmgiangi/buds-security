@@ -8,7 +8,7 @@ import java.util.Map;
  * NoAuthenticationEvent indicates that the user could not be authenticated through the request data
  *
  * @author Gianluigi De Marco
- * @version 0.1-SNAPSHOT
+ * @version 0.1
  * @since 27 09 2022
  */
 public class NoAuthenticationEvent implements AuthenticationEvent {
@@ -17,7 +17,7 @@ public class NoAuthenticationEvent implements AuthenticationEvent {
      * {@inheritDoc}
      */
     @Override
-    public SecurityUser getUser() {
+    public SecurityUser<?> user() {
         return null;
     }
 
