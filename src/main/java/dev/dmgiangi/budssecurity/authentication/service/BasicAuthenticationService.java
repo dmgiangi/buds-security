@@ -12,7 +12,9 @@ import org.mindrot.jbcrypt.BCrypt;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * class
+ * Basic Authentication service try to authenticate the user reading the header
+ * Authorization with value base64(username:password)
+ * check the given credential against a user retrieved with the SecurityUserProvider
  *
  * @author Gianluigi De Marco
  * @version x
@@ -21,10 +23,18 @@ import javax.servlet.http.HttpServletRequest;
 public class BasicAuthenticationService implements AuthenticationService {
     private final SecurityUserProvider securityUserProvider;
 
+    /**
+     * Constructor for BasicAuthenticationService.
+     *
+     * @param securityUserProvider a {@link dev.dmgiangi.budssecurity.authentication.provider.SecurityUserProvider} object
+     */
     public BasicAuthenticationService(SecurityUserProvider securityUserProvider) {
         this.securityUserProvider = securityUserProvider;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AuthenticationEvent authenticate(HttpServletRequest request) {
         //try to obtain username:password from request header and authenticate it

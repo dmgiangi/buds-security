@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * desc
+ * AuthorizationHandler check if Security has the authorities
+ * to continue till the controller
  *
  * @author Gianluigi De Marco
  * @version 0.1

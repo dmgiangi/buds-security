@@ -33,33 +33,25 @@ public class BasicAuthenticationEvent implements SuccessfulAuthenticationEvent {
         return securityUser;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public Map<String, String> getAuthenticationResponseHeader() {
         return authenticationResponseHeader;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isAuthenticated() {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isRefreshTokenRequired() {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isBearerTokenRequired() {
         return true;

@@ -70,7 +70,16 @@ public interface SecurityUser<T> extends Serializable {
      */
     boolean isVerified();
 
+    /**
+     * Compare MainIdentifier with main identifier of another SecurityUser
+     *
+     * @param otherElement a {@link java.lang.Object} object
+     * @return a boolean
+     */
     default boolean compareMainIdentifierWith(Object otherElement) {
-        return this.getMainIdentifier().equals(otherElement);
+        if (otherElement instanceof SecurityUser)
+            return this.getMainIdentifier().equals(otherElement);
+        else
+            return false;
     }
 }

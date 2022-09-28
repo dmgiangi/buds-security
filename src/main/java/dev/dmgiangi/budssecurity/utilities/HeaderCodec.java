@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
- * class
+ * HeaderCodec decode header from a request to different form
  *
  * @author Gianluigi De Marco
  * @version x
@@ -15,6 +15,12 @@ import java.util.Base64;
  */
 public class HeaderCodec {
 
+    /**
+     * getBasicTicketFrom.
+     *
+     * @param request a {@link javax.servlet.http.HttpServletRequest} object
+     * @return a {@link dev.dmgiangi.budssecurity.models.BasicTicket} object
+     */
     public static BasicTicket getBasicTicketFrom(HttpServletRequest request) {
         String token = request.getHeader(Constants.AUTHENTICATION_HEADER);
 
@@ -33,6 +39,12 @@ public class HeaderCodec {
                 : new BasicTicket(credential[0], credential[1], false);
     }
 
+    /**
+     * getBearerTicketFrom.
+     *
+     * @param request a {@link javax.servlet.http.HttpServletRequest} object
+     * @return a {@link java.lang.String} object
+     */
     public static String getBearerTicketFrom(HttpServletRequest request) {
         String token = request.getHeader(Constants.AUTHENTICATION_HEADER);
 
@@ -42,6 +54,12 @@ public class HeaderCodec {
         return token.replace(Constants.BEARER, "");
     }
 
+    /**
+     * getRefreshTicketFrom.
+     *
+     * @param request a {@link javax.servlet.http.HttpServletRequest} object
+     * @return a {@link java.lang.String} object
+     */
     public static String getRefreshTicketFrom(HttpServletRequest request) {
         String token = request.getHeader(Constants.AUTHENTICATION_HEADER);
 

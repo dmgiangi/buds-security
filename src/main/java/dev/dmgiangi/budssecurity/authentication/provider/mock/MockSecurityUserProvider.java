@@ -8,7 +8,17 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.util.Set;
 
 /**
- * class
+ * MockSecurityUserProvider mock SecurityUserProvider.
+ * there is a unique SecurityUser
+ * with:
+ * MainIdentifier: Long 1L
+ * password: password
+ * roles: [USER, ADMIN]
+ * identifier: [user, user@user.com]
+ * accountNotExpired: true
+ * accountNotLocked: true
+ * credentialNotExpired: true
+ * verified: true
  *
  * @author Gianluigi De Marco
  * @version x
@@ -26,6 +36,9 @@ public class MockSecurityUserProvider implements SecurityUserProvider {
             true
     );
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SecurityUser<Long> findUserByIdentifier(String identifier) {
         boolean userMatch = securityUser

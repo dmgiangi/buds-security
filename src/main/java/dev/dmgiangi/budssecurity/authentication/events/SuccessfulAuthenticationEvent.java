@@ -1,7 +1,8 @@
 package dev.dmgiangi.budssecurity.authentication.events;
 
 /**
- * class
+ * SuccessfulAuthenticationEvent is the base event for any AuthenticationEvent
+ * that end with success
  *
  * @author Gianluigi De Marco
  * @version x
