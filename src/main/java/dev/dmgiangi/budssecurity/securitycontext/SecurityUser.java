@@ -1,5 +1,7 @@
 package dev.dmgiangi.budssecurity.securitycontext;
 
+import dev.dmgiangi.budssecurity.securitycontext.identifiers.MainIdentifier;
+
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -11,13 +13,13 @@ import java.util.Collection;
  * @version 0.1
  * @since 19 09 2022
  */
-public interface SecurityUser<T> extends Serializable {
+public interface SecurityUser extends Serializable {
     /**
      * Gets main identifier usually the id of the user
      *
      * @return the main identifier
      */
-    T getMainIdentifier();
+    MainIdentifier getMainIdentifier();
 
     /**
      * Gets password of the user
@@ -69,17 +71,4 @@ public interface SecurityUser<T> extends Serializable {
      * @return the boolean
      */
     boolean isVerified();
-
-    /**
-     * Compare MainIdentifier with main identifier of another SecurityUser
-     *
-     * @param otherElement a {@link java.lang.Object} object
-     * @return a boolean
-     */
-    default boolean compareMainIdentifierWith(Object otherElement) {
-        if (otherElement instanceof SecurityUser)
-            return this.getMainIdentifier().equals(otherElement);
-        else
-            return false;
-    }
 }

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthenticationHeaderWriterHandler implements HandlerInterceptor {
     /**
      * {@inheritDoc}
-     * <p>
+     *
      * Set the header of the response by taking them from the
      * AuthenticationEvent attribute of the response (if it exist).
      */
@@ -39,7 +39,7 @@ public class AuthenticationHeaderWriterHandler implements HandlerInterceptor {
 
     /**
      * {@inheritDoc}
-     * <p>
+     *
      * remove the user from securityContext
      */
     @Override

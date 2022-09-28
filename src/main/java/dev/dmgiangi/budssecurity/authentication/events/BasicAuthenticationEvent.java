@@ -14,14 +14,14 @@ import java.util.Map;
  */
 public class BasicAuthenticationEvent implements SuccessfulAuthenticationEvent {
     private final Map<String, String> authenticationResponseHeader = new HashMap<>();
-    private final SecurityUser<?> securityUser;
+    private final SecurityUser securityUser;
 
     /**
      * Constructor for BasicAuthenticationEvent.
      *
      * @param securityUser a {@link dev.dmgiangi.budssecurity.securitycontext.SecurityUser} object
      */
-    public BasicAuthenticationEvent(SecurityUser<?> securityUser) {
+    public BasicAuthenticationEvent(SecurityUser securityUser) {
         this.securityUser = securityUser;
     }
 
@@ -29,7 +29,7 @@ public class BasicAuthenticationEvent implements SuccessfulAuthenticationEvent {
      * {@inheritDoc}
      */
     @Override
-    public SecurityUser<?> user() {
+    public SecurityUser getUser() {
         return securityUser;
     }
 

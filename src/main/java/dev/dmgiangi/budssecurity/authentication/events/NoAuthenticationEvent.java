@@ -2,6 +2,7 @@ package dev.dmgiangi.budssecurity.authentication.events;
 
 import dev.dmgiangi.budssecurity.securitycontext.SecurityUser;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,22 +13,28 @@ import java.util.Map;
  * @since 27 09 2022
  */
 public class NoAuthenticationEvent implements AuthenticationEvent {
+    private final Map<String, String> authenticationResponseHeade =
+            new HashMap<>();
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public SecurityUser<?> user() {
+    public SecurityUser getUser() {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<String, String> getAuthenticationResponseHeader() {
-        return null;
+        return authenticationResponseHeade;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isAuthenticated() {
         return false;

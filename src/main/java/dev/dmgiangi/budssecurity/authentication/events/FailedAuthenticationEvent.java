@@ -2,6 +2,7 @@ package dev.dmgiangi.budssecurity.authentication.events;
 
 import dev.dmgiangi.budssecurity.securitycontext.SecurityUser;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -11,20 +12,24 @@ import java.util.Map;
  * @version 0.1
  * @since 27 09 2022
  */
-public record FailedAuthenticationEvent(SecurityUser<?> user) implements AuthenticationEvent {
+public class FailedAuthenticationEvent implements AuthenticationEvent {
+    Map<String, String> authenticationResponseHeader = new HashMap<>();
+    SecurityUser user;
+
     /**
      * Constructor for AuthenticationFailedEvent.
      *
-     * @param user a {@link SecurityUser}
+     * @param user a {@link dev.dmgiangi.budssecurity.securitycontext.SecurityUser}
      */
-    public FailedAuthenticationEvent {
+    public FailedAuthenticationEvent(SecurityUser user) {
+        this.user = user;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public SecurityUser<?> user() {
+    public SecurityUser getUser() {
         return user;
     }
 
@@ -33,12 +38,10 @@ public record FailedAuthenticationEvent(SecurityUser<?> user) implements Authent
      */
     @Override
     public Map<String, String> getAuthenticationResponseHeader() {
-        return null;
+        return authenticationResponseHeader;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isAuthenticated() {
         return false;

@@ -18,7 +18,7 @@ public interface AuthenticationEvent {
      *
      * @return a {@link dev.dmgiangi.budssecurity.securitycontext.SecurityUser}
      */
-    SecurityUser<?> user();
+    SecurityUser getUser();
 
     /**
      * get headers, inherent to authentication, that will be added to response

@@ -11,7 +11,6 @@ import dev.dmgiangi.budssecurity.utilities.Constants;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * AuthenticationManager try to authenticate a request through registered AuthenticationService
@@ -22,9 +21,7 @@ import java.util.stream.Stream;
  * @since 26 09 2022
  */
 public class AuthenticationManager {
-    // TODO: 27/09/22 inject authentication services in modular way
     private final List<AuthenticationService> authenticationServices;
-    // TODO: 27/09/22 inject authentication listeners in modular way
     private final List<AuthenticationEventListener> authenticationEventListeners;
 
     /**
@@ -48,23 +45,30 @@ public class AuthenticationManager {
      */
     public void authenticate(HttpServletRequest request) {
 
-        Stream<AuthenticationEvent> authenticationEventStream =
+        List<AuthenticationEvent> authenticationEvents =
                 authenticationServices
                         .stream()
-                        .map(service -> service.authenticate(request));
+                        .map(service -> service.authenticate(request))
+                        .toList();
 
-        AuthenticationEvent authentication = authenticationEventStream
+        AuthenticationEvent authentication = authenticationEvents
+                .stream()
                 .filter(auth -> auth instanceof SuccessfulAuthenticationEvent)
                 .findFirst()
-                .orElse(authenticationEventStream
-                        .filter(auth -> auth instanceof FailedAuthenticationEvent)
-                        .findFirst()
-                        .orElse(new NoAuthenticationEvent()));
+                .orElse(
+                        authenticationEvents
+                                .stream()
+                                .filter(auth -> auth instanceof FailedAuthenticationEvent)
+                                .findFirst()
+                                .orElse(
+                                        new NoAuthenticationEvent()
+                                )
+                );
 
         authenticationEventListeners
                 .forEach(listener -> listener.AuthenticationDone(authentication));
 
         request.setAttribute(Constants.AUTHENTICATION_ATTRIBUTE, authentication);
-        SecurityContext.setUser(authentication.user());
+        SecurityContext.setUser(authentication.getUser());
     }
 }

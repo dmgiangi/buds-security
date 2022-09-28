@@ -1,9 +1,5 @@
 package dev.dmgiangi.budssecurity.utilities;
 
-import dev.dmgiangi.budssecurity.authentication.events.AuthenticationEvent;
-import dev.dmgiangi.budssecurity.securitycontext.SecurityContext;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -32,16 +28,5 @@ public class AuthUtils {
     public static void setIsAuthenticationRequiredOn(HttpServletResponse response) {
         response.setHeader(Constants.WWW_AUTHENTICATE, "Basic realm='" + BudsConstants.realm() + "'");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-    }
-
-    /**
-     * add the AuthenticationEvent in the request and the user in the SecurityContext.
-     *
-     * @param request a {@link javax.servlet.http.HttpServletRequest} object
-     * @param auth    a {@link dev.dmgiangi.budssecurity.authentication.events.AuthenticationEvent} object
-     */
-    public static void setSuccessfulAuthOn(HttpServletRequest request, AuthenticationEvent auth) {
-        request.setAttribute(Constants.AUTHENTICATION_ATTRIBUTE, auth);
-        SecurityContext.setUser(auth.user());
     }
 }

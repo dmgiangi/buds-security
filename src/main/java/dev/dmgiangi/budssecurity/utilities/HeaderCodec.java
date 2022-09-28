@@ -10,7 +10,7 @@ import java.util.Base64;
  * HeaderCodec decode header from a request to different form
  *
  * @author Gianluigi De Marco
- * @version x
+ * @version 0.1
  * @since 28 09 2022
  */
 public class HeaderCodec {
@@ -36,7 +36,7 @@ public class HeaderCodec {
         String[] credential = token.split(":", 2);
         return credential.length == 2
                 ? new BasicTicket(credential[0], credential[1], true)
-                : new BasicTicket(credential[0], credential[1], false);
+                : new BasicTicket("", "", false);
     }
 
     /**

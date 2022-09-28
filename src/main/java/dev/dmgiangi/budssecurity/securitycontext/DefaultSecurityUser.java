@@ -1,5 +1,7 @@
 package dev.dmgiangi.budssecurity.securitycontext;
 
+import dev.dmgiangi.budssecurity.securitycontext.identifiers.MainIdentifier;
+
 import java.util.Collection;
 // TODO: 27/09/22 document how to override the DefaultSecurityUser
 
@@ -11,8 +13,8 @@ import java.util.Collection;
  * @version 0.1
  * @since 22 09 2022
  */
-public class DefaultSecurityUser<T> implements SecurityUser<T> {
-    private T mainIdentifier;
+public class DefaultSecurityUser implements SecurityUser {
+    private MainIdentifier mainIdentifier;
     private String password;
     private Collection<String> authorities;
     private Collection<String> identifiers;
@@ -34,7 +36,7 @@ public class DefaultSecurityUser<T> implements SecurityUser<T> {
      * @param verified              the verified
      */
     public DefaultSecurityUser(
-            T mainIdentifier,
+            MainIdentifier mainIdentifier,
             String password,
             Collection<String> authorities,
             Collection<String> identifiers,
@@ -62,7 +64,7 @@ public class DefaultSecurityUser<T> implements SecurityUser<T> {
      * {@inheritDoc}
      */
     @Override
-    public T getMainIdentifier() {
+    public MainIdentifier getMainIdentifier() {
         return mainIdentifier;
     }
 
