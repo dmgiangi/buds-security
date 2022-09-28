@@ -1,5 +1,6 @@
-# Buds Security
+# Architecture
 
+![](/./misc/Buds-Security.svg)
 This project simply implement an authorization and authentication service in the spring context.
 The core of the project is based on spring interceptor and on the use of ThreadLocal to permit controllers access to
 user information.

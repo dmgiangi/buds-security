@@ -1,6 +1,7 @@
 package dev.dmgiangi.budssecurity.handlerChain;
 
 import dev.dmgiangi.budssecurity.authentication.events.AuthenticationEvent;
+import dev.dmgiangi.budssecurity.authentication.events.SuccessfulAuthenticationEvent;
 import dev.dmgiangi.budssecurity.securitycontext.SecurityContext;
 import dev.dmgiangi.budssecurity.utilities.AuthUtils;
 import dev.dmgiangi.budssecurity.utilities.Constants;
@@ -30,12 +31,11 @@ public class AuthorizationHandler implements HandlerInterceptor {
         AuthenticationEvent auth = (AuthenticationEvent) request.getAttribute(Constants.AUTHENTICATION_ATTRIBUTE);
         Boolean isAuthRequired = (Boolean) request.getAttribute(Constants.IS_AUTH_REQUIRED);
 
-        if (auth == null && isAuthRequired) {
-            AuthUtils.setIsAuthenticationRequiredOn(response);
-            return false;
-        }
+        if (auth instanceof SuccessfulAuthenticationEvent)
+            return true;
 
-        return true;
+        AuthUtils.setIsAuthenticationRequiredOn(response);
+        return false;
     }
 
     /**
