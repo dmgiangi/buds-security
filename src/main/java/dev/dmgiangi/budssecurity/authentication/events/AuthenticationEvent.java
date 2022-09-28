@@ -33,4 +33,22 @@ public interface AuthenticationEvent {
      * @return a boolean
      */
     boolean isAuthenticated();
+
+    /**
+     * Return whether the refresh token should be added in the response
+     *
+     * @return a boolean, true if Refresh Token is needed in the response
+     */
+    default boolean isRefreshTokenRequired() {
+        return false;
+    }
+
+    /**
+     * Return whether the Bearer Token should be added in the response
+     *
+     * @return a boolean, true if Bearer Token is needed in the response
+     */
+    default boolean isBearerTokenRequired() {
+        return false;
+    }
 }

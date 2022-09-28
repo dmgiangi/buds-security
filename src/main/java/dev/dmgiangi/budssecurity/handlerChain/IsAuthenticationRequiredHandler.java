@@ -82,7 +82,7 @@ public class IsAuthenticationRequiredHandler implements HandlerInterceptor {
 
     /**
      * {@inheritDoc}
-     * <p>
+     *
      * remove the user from securityContext
      */
     @Override
