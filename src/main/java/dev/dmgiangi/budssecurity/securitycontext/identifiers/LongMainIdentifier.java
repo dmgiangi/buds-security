@@ -6,7 +6,7 @@ package dev.dmgiangi.budssecurity.securitycontext.identifiers;
  * {@inheritDoc}
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 28 09 2022
  */
 public class LongMainIdentifier implements MainIdentifier {

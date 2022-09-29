@@ -10,7 +10,7 @@ import java.util.List;
  * AuthenticationManagerBuilder class.
  *
  * @author giangi
- * @version 0.1
+ * @version 0.1.1
  */
 public class AuthenticationManagerBuilder {
     private final List<AuthenticationService> authenticationServices = new ArrayList<>();

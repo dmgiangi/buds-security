@@ -9,7 +9,7 @@ import java.util.Map;
  * AuthenticationFailedEvent represent a failed Authentication
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 27 09 2022
  */
 public class FailedAuthenticationEvent implements AuthenticationEvent {

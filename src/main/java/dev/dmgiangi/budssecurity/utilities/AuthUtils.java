@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
  * in order to obtain cleaner code
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 27 09 2022
  */
 public class AuthUtils {

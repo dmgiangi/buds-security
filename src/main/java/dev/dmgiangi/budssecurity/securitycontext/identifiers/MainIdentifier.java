@@ -6,7 +6,7 @@ import java.io.Serializable;
  * MainIdentifier allow to use an unknown type as main identifier of a SecurityUser
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 28 09 2022
  */
 public interface MainIdentifier extends Serializable {

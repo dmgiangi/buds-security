@@ -7,7 +7,7 @@ import java.util.Optional;
  * SecurityContext allow to access the authenticated user information for the duration of the request.
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 19 09 2022
  */
 public class SecurityContext {

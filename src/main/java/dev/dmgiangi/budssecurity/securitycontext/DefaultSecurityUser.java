@@ -10,7 +10,7 @@ import java.util.Collection;
  * It can be overridden by
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 22 09 2022
  */
 public class DefaultSecurityUser implements SecurityUser {

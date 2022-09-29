@@ -23,7 +23,7 @@ import java.util.Set;
  * verified: true
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 28 09 2022
  */
 public class MockSecurityUserProvider implements SecurityUserProvider {

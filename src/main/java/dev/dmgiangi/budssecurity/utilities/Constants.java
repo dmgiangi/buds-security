@@ -4,7 +4,7 @@ package dev.dmgiangi.budssecurity.utilities;
  * This class provides constant used in buds security in order to obtain cleaner code
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 19 09 2022
  */
 public class Constants {

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * this Configuration create the bean of AuthenticationService
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 28 09 2022
  */
 @Configuration

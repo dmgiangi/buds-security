@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * check the given credential against a user retrieved with the SecurityUserProvider
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 28 09 2022
  */
 public class BasicAuthenticationService implements AuthenticationService {

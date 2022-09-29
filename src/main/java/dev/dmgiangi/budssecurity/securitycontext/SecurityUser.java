@@ -10,7 +10,7 @@ import java.util.Collection;
  * and its authorities through the application layer
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 19 09 2022
  */
 public interface SecurityUser extends Serializable {

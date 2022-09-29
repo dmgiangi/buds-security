@@ -23,7 +23,7 @@ import java.util.List;
  * It must be imported in order to use BudsSecurity
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 28 09 2022
  */
 @Configuration

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * AuthenticationHeaderWriterHandler set the response header
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 18 09 2022
  */
 public class AuthenticationHeaderWriterHandler implements HandlerInterceptor {

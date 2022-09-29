@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * to continue till the controller
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 27 09 2022
  */
 public class AuthorizationHandler implements HandlerInterceptor {

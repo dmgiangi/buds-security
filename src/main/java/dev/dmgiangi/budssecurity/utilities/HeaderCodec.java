@@ -10,7 +10,7 @@ import java.util.Base64;
  * HeaderCodec decode header from a request to different form
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 28 09 2022
  */
 public class HeaderCodec {

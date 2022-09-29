@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  * if authentication is successful a AuthenticationEvent is returned.
  *
  * @author Gianluigi De Marco
- * @version 0.1
+ * @version 0.1.1
  * @since 27 09 2022
  */
 public interface AuthenticationService {
