@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -23,11 +22,10 @@ import java.util.List;
  * It must be imported in order to use BudsSecurity
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 28 09 2022
  */
 @Configuration
-@EnableWebMvc
 @ComponentScan("dev.dmgiangi.budssecurity")
 public class BudsSecurityConfiguration implements WebMvcConfigurer {
     // TODO: 28/09/22 implements this part

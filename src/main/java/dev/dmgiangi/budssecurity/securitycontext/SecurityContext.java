@@ -7,7 +7,7 @@ import java.util.Optional;
  * SecurityContext allow to access the authenticated user information for the duration of the request.
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 19 09 2022
  */
 public class SecurityContext {
@@ -18,8 +18,21 @@ public class SecurityContext {
      *
      * @return a {@link java.util.Optional} object
      */
+    public static <T extends SecurityUser> Optional<T> getUser(Class<T> securityUserConcreteClass) {
+        return SecurityContext.threadLocal.get() != null && SecurityContext.threadLocal.get().getClass().equals(securityUserConcreteClass)
+                ? Optional.ofNullable(
+                securityUserConcreteClass
+                        .cast(
+                                SecurityContext.threadLocal.get()))
+                : Optional.empty();
+    }
+
     public static Optional<SecurityUser> getUser() {
         return Optional.ofNullable(SecurityContext.threadLocal.get());
+    }
+
+    public static boolean isUserAuthenticated() {
+        return threadLocal.get() != null;
     }
 
     /**

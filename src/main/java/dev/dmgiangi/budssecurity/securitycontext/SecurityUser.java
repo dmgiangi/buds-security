@@ -1,7 +1,5 @@
 package dev.dmgiangi.budssecurity.securitycontext;
 
-import dev.dmgiangi.budssecurity.securitycontext.identifiers.MainIdentifier;
-
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -10,7 +8,7 @@ import java.util.Collection;
  * and its authorities through the application layer
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 19 09 2022
  */
 public interface SecurityUser extends Serializable {
@@ -19,7 +17,7 @@ public interface SecurityUser extends Serializable {
      *
      * @return the main identifier
      */
-    MainIdentifier getMainIdentifier();
+    String getMainIdentifierAsString();
 
     /**
      * Gets password of the user

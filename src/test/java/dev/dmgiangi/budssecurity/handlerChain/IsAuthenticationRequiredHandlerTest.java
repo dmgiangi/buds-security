@@ -1,7 +1,7 @@
 package dev.dmgiangi.budssecurity.handlerChain;
 
 import dev.dmgiangi.budssecurity.mock.TestController;
-import dev.dmgiangi.budssecurity.securitycontext.DefaultSecurityUser;
+import dev.dmgiangi.budssecurity.securitycontext.LongSecurityUser;
 import dev.dmgiangi.budssecurity.securitycontext.SecurityContext;
 import dev.dmgiangi.budssecurity.utilities.Constants;
 import org.junit.jupiter.api.BeforeEach;
@@ -121,7 +121,7 @@ class IsAuthenticationRequiredHandlerTest {
     @Test
     void postHandle() {
         ModelAndView modelAndView = Mockito.mock(ModelAndView.class);
-        SecurityContext.setUser(new DefaultSecurityUser());
+        SecurityContext.setUser(new LongSecurityUser());
 
         assertDoesNotThrow(
                 () -> isAuthenticationRequired.postHandle(request, response, handler, modelAndView),

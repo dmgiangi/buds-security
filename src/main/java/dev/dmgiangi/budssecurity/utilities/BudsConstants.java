@@ -6,7 +6,7 @@ import org.springframework.core.env.Environment;
  * desc
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 27 09 2022
  */
 public class BudsConstants {

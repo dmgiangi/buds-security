@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * AuthenticationHandler try to authenticate request through AuthenticationManager
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 28 09 2022
  */
 public class AuthenticationHandler implements HandlerInterceptor {

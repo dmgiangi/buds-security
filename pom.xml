@@ -5,7 +5,7 @@
 
     <groupId>dev.dmgiangi</groupId>
     <artifactId>buds-security</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
     <name>Buds security</name>
     <description>A simple implementation of authentication and authorization service based on spring boot</description>
     <url>https://github.com/dmgiangi/buds-security.git</url>

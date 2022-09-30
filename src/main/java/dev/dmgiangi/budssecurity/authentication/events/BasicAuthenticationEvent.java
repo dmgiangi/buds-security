@@ -9,7 +9,7 @@ import java.util.Map;
  * BasicAuthenticationEvent represents a successful basic authentication
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 28 09 2022
  */
 public class BasicAuthenticationEvent implements SuccessfulAuthenticationEvent {

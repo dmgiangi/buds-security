@@ -9,7 +9,7 @@ import java.util.Map;
  * and a map with header that will be added in the response
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 27 09 2022
  */
 public interface AuthenticationEvent {

@@ -1,9 +1,8 @@
 package dev.dmgiangi.budssecurity.authentication.provider.mock;
 
 import dev.dmgiangi.budssecurity.authentication.provider.SecurityUserProvider;
-import dev.dmgiangi.budssecurity.securitycontext.DefaultSecurityUser;
+import dev.dmgiangi.budssecurity.securitycontext.LongSecurityUser;
 import dev.dmgiangi.budssecurity.securitycontext.SecurityUser;
-import dev.dmgiangi.budssecurity.securitycontext.identifiers.LongMainIdentifier;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Set;
@@ -23,12 +22,12 @@ import java.util.Set;
  * verified: true
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 28 09 2022
  */
 public class MockSecurityUserProvider implements SecurityUserProvider {
-    private static final SecurityUser securityUser = new DefaultSecurityUser(
-            new LongMainIdentifier(1L),
+    private static final SecurityUser securityUser = new LongSecurityUser(
+            1L,
             BCrypt.hashpw("password", BCrypt.gensalt()),
             Set.of("USER", "ADMIN"),
             Set.of("user", "user@user.com"),

@@ -5,7 +5,7 @@ package dev.dmgiangi.budssecurity.authentication.events;
  * that end with success
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 28 09 2022
  */
 public interface SuccessfulAuthenticationEvent extends AuthenticationEvent {

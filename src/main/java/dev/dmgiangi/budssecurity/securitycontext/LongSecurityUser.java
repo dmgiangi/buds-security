@@ -1,20 +1,17 @@
 package dev.dmgiangi.budssecurity.securitycontext;
 
-import dev.dmgiangi.budssecurity.securitycontext.identifiers.MainIdentifier;
-
 import java.util.Collection;
-// TODO: 27/09/22 document how to override the DefaultSecurityUser
 
 /**
  * DefaultSecurityUser is an implementation of SecurityUser used by default in the framework.
  * It can be overridden by
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 22 09 2022
  */
-public class DefaultSecurityUser implements SecurityUser {
-    private MainIdentifier mainIdentifier;
+public class LongSecurityUser implements SecurityUser {
+    private Long mainIdentifier;
     private String password;
     private Collection<String> authorities;
     private Collection<String> identifiers;
@@ -35,8 +32,8 @@ public class DefaultSecurityUser implements SecurityUser {
      * @param credentialsNonExpired the credentials non expired
      * @param verified              the verified
      */
-    public DefaultSecurityUser(
-            MainIdentifier mainIdentifier,
+    public LongSecurityUser(
+            Long mainIdentifier,
             String password,
             Collection<String> authorities,
             Collection<String> identifiers,
@@ -57,15 +54,15 @@ public class DefaultSecurityUser implements SecurityUser {
     /**
      * Instantiates a new Default security user.
      */
-    public DefaultSecurityUser() {
+    public LongSecurityUser() {
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public MainIdentifier getMainIdentifier() {
-        return mainIdentifier;
+    public String getMainIdentifierAsString() {
+        return mainIdentifier.toString();
     }
 
     /** {@inheritDoc} */
@@ -104,9 +101,15 @@ public class DefaultSecurityUser implements SecurityUser {
         return credentialsNonExpired;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isVerified() {
         return verified;
+    }
+
+    public Long getMainIdentifier() {
+        return mainIdentifier;
     }
 }

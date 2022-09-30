@@ -3,7 +3,7 @@ package dev.dmgiangi.budssecurity.handlerChain;
 import dev.dmgiangi.budssecurity.authentication.events.AuthenticationEvent;
 import dev.dmgiangi.budssecurity.authentication.events.SuccessfulAuthenticationEvent;
 import dev.dmgiangi.budssecurity.securitycontext.SecurityContext;
-import dev.dmgiangi.budssecurity.utilities.AuthUtils;
+import dev.dmgiangi.budssecurity.utilities.BudsConstants;
 import dev.dmgiangi.budssecurity.utilities.Constants;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * to continue till the controller
  *
  * @author Gianluigi De Marco
- * @version 0.1.1
+ * @version 0.1.2
  * @since 27 09 2022
  */
 public class AuthorizationHandler implements HandlerInterceptor {
@@ -34,8 +34,12 @@ public class AuthorizationHandler implements HandlerInterceptor {
         if (auth instanceof SuccessfulAuthenticationEvent)
             return true;
 
-        AuthUtils.setIsAuthenticationRequiredOn(response);
-        return false;
+        if (isAuthRequired) {
+            response.setHeader(Constants.WWW_AUTHENTICATE, "Basic realm='" + BudsConstants.realm() + "'");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return false;
+        }
+        return true;
     }
 
     /**
