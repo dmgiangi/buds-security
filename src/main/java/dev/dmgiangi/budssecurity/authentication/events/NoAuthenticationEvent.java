@@ -24,17 +24,13 @@ public class NoAuthenticationEvent implements AuthenticationEvent {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public Map<String, String> getAuthenticationResponseHeader() {
         return authenticationResponseHeade;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isAuthenticated() {
         return false;

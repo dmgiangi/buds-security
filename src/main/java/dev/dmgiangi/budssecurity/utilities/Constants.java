@@ -63,4 +63,8 @@ public class Constants {
      * Constant <code>HEADERS_FOR_RESPONSE="response-header"</code>
      */
     public static final String HEADERS_FOR_RESPONSE = "response-header";
+    /**
+     * Constant <code>STATIC_RESOURCE="static-resource"</code>
+     */
+    public static final String STATIC_RESOURCE = "static-resource";
 }

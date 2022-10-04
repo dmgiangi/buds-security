@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * class
  *
  * @author Gianluigi De Marco
- * @version x
+ * @version 0.1.2
  * @since 29 09 2022
  */
 @Configuration

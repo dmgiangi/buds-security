@@ -19,7 +19,7 @@ public class AuthenticationHandler implements HandlerInterceptor {
     private final AuthenticationManager authenticationManager;
 
     /**
-     * <p>Constructor for AuthenticationHandler.</p>
+     * Constructor for AuthenticationHandler.
      *
      * @param authenticationManager a {@link dev.dmgiangi.budssecurity.authentication.AuthenticationManager} object
      */
@@ -38,7 +38,7 @@ public class AuthenticationHandler implements HandlerInterceptor {
 
     /**
      * {@inheritDoc}
-     * <p>
+     *
      * remove the user from securityContext
      */
     @Override

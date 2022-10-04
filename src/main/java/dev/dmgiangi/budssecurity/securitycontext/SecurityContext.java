@@ -16,6 +16,8 @@ public class SecurityContext {
     /**
      * get the SecurityUser.
      *
+     * @param securityUserConcreteClass a {@link java.lang.Class} that extends {@link SecurityUser} object
+     * @param <T>                       a T class
      * @return a {@link java.util.Optional} object
      */
     public static <T extends SecurityUser> Optional<T> getUser(Class<T> securityUserConcreteClass) {
@@ -27,10 +29,20 @@ public class SecurityContext {
                 : Optional.empty();
     }
 
+    /**
+     * getUser.
+     *
+     * @return a {@link java.util.Optional}<{@link SecurityUser}> object
+     */
     public static Optional<SecurityUser> getUser() {
         return Optional.ofNullable(SecurityContext.threadLocal.get());
     }
 
+    /**
+     * isUserAuthenticated.
+     *
+     * @return a boolean
+     */
     public static boolean isUserAuthenticated() {
         return threadLocal.get() != null;
     }

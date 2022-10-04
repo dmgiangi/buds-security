@@ -3,6 +3,7 @@ package dev.dmgiangi.budssecurity.configuration;
 import dev.dmgiangi.budssecurity.authentication.AuthenticationManager;
 import dev.dmgiangi.budssecurity.authentication.listeners.AuthenticationEventListener;
 import dev.dmgiangi.budssecurity.authentication.service.AuthenticationService;
+import dev.dmgiangi.budssecurity.authorizations.StaticResourcesAuthorizationSetting;
 import dev.dmgiangi.budssecurity.handlerChain.AuthenticationHandler;
 import dev.dmgiangi.budssecurity.handlerChain.AuthenticationHeaderWriterHandler;
 import dev.dmgiangi.budssecurity.handlerChain.AuthorizationHandler;
@@ -33,8 +34,11 @@ public class BudsSecurityConfiguration implements WebMvcConfigurer {
     @Autowired
     private List<AuthenticationService> authenticationServices;
 
+    @Autowired
+    private StaticResourcesAuthorizationSetting staticResourcesAuthorizationSetting;
+
     /**
-     * <p>authenticationManager.</p>
+     * authenticationManager.
      *
      * @return a {@link dev.dmgiangi.budssecurity.authentication.AuthenticationManager} object
      */
@@ -47,7 +51,7 @@ public class BudsSecurityConfiguration implements WebMvcConfigurer {
     }
 
     /**
-     * <p>authenticationHandler.</p>
+     * authenticationHandler.
      *
      * @return a {@link dev.dmgiangi.budssecurity.handlerChain.AuthenticationHandler} object
      */
@@ -59,7 +63,7 @@ public class BudsSecurityConfiguration implements WebMvcConfigurer {
     }
 
     /**
-     * <p>authenticationHeaderWriterHandler.</p>
+     * authenticationHeaderWriterHandler.
      *
      * @return a {@link dev.dmgiangi.budssecurity.handlerChain.AuthenticationHeaderWriterHandler} object
      */
@@ -69,7 +73,7 @@ public class BudsSecurityConfiguration implements WebMvcConfigurer {
     }
 
     /**
-     * <p>authorizationHandler.</p>
+     * authorizationHandler.
      *
      * @return a {@link dev.dmgiangi.budssecurity.handlerChain.AuthorizationHandler} object
      */
@@ -83,7 +87,7 @@ public class BudsSecurityConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new IsAuthenticationRequiredHandler());
+        registry.addInterceptor(new IsAuthenticationRequiredHandler(staticResourcesAuthorizationSetting));
         registry.addInterceptor(authenticationHandler());
         registry.addInterceptor(authenticationHeaderWriterHandler());
         registry.addInterceptor(authorizationHandler());

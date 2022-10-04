@@ -109,6 +109,11 @@ public class LongSecurityUser implements SecurityUser {
         return verified;
     }
 
+    /**
+     * <p>Getter for the field <code>mainIdentifier</code>.</p>
+     *
+     * @return a {@link java.lang.Long} object
+     */
     public Long getMainIdentifier() {
         return mainIdentifier;
     }

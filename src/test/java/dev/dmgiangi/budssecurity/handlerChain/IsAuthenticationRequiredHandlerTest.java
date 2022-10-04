@@ -1,5 +1,6 @@
 package dev.dmgiangi.budssecurity.handlerChain;
 
+import dev.dmgiangi.budssecurity.authorizations.VoidStaticResourcesAuthorizationSetting;
 import dev.dmgiangi.budssecurity.mock.TestController;
 import dev.dmgiangi.budssecurity.securitycontext.LongSecurityUser;
 import dev.dmgiangi.budssecurity.securitycontext.SecurityContext;
@@ -31,7 +32,7 @@ class IsAuthenticationRequiredHandlerTest {
 
     @BeforeEach
     void setUp() {
-        isAuthenticationRequired = new IsAuthenticationRequiredHandler();
+        isAuthenticationRequired = new IsAuthenticationRequiredHandler(new VoidStaticResourcesAuthorizationSetting());
         request = new MockHttpServletRequest();
         response = new MockHttpServletResponse();
     }

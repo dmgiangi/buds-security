@@ -1,8 +1,8 @@
 package dev.dmgiangi.budssecurity.handlerChain;
 
+import dev.dmgiangi.budssecurity.authorizations.StaticResourcesAuthorizationSetting;
 import dev.dmgiangi.budssecurity.authorizations.annotations.Public;
 import dev.dmgiangi.budssecurity.securitycontext.SecurityContext;
-import dev.dmgiangi.budssecurity.utilities.AuthUtils;
 import dev.dmgiangi.budssecurity.utilities.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 /**
  * IsAuthRequiredInterceptor gets from the spring context the method handler that should handle the request
@@ -27,6 +28,17 @@ import javax.servlet.http.HttpServletResponse;
 public class IsAuthenticationRequiredHandler implements HandlerInterceptor {
     private static final Logger log = LoggerFactory.getLogger(IsAuthenticationRequiredHandler.class);
 
+    private final StaticResourcesAuthorizationSetting staticResourcesAuthorizationSetting;
+
+    /**
+     * Constructor for IsAuthenticationRequiredHandler.
+     *
+     * @param staticResourcesAuthorizationSetting a {@link dev.dmgiangi.budssecurity.authorizations.StaticResourcesAuthorizationSetting} object
+     */
+    public IsAuthenticationRequiredHandler(StaticResourcesAuthorizationSetting staticResourcesAuthorizationSetting) {
+        this.staticResourcesAuthorizationSetting = staticResourcesAuthorizationSetting;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -36,30 +48,54 @@ public class IsAuthenticationRequiredHandler implements HandlerInterceptor {
             HttpServletResponse response,
             Object supposedHandler
     ) throws Exception {
-        //Get the HandlerMethod injected by Spring
-        HandlerMethod requestMethodHandler = getRequestMethodHandler(supposedHandler);
+        //Try to get the HandlerMethod injected by Spring
+        Optional<HandlerMethod> requestMethodHandler = getRequestMethodHandler(supposedHandler);
 
-        //if no method cannot be found a response with 404 http status is Returned
-        if (requestMethodHandler == null) {
-            AuthUtils.setNotFoundOn(response);
-            return false;
+        //determine handlerMethod is public if requested resource is a handler method
+        if (requestMethodHandler.isPresent()) {
+            //Check if the handler method need Authentication and
+            boolean isAuthRequired = !isHandlerMethodPublic(requestMethodHandler.get());
+            request.setAttribute(Constants.IS_AUTH_REQUIRED, isAuthRequired);
+            request.setAttribute(Constants.HANDLER_METHOD, requestMethodHandler.get());
+
+            return true;
         }
 
-        //Check if the handler method need Authentication and
-        boolean isAuthRequired = !isTheEndpointPublic(requestMethodHandler);
+        //determine if exist a public static resource that match the request
+        String path = request.getRequestURI().substring(
+                request.getContextPath().length());
+
+        boolean isAuthRequired = staticResourcesAuthorizationSetting
+                .getPublicResourcesPath()
+                .stream()
+                .anyMatch(path::matches);
+
         request.setAttribute(Constants.IS_AUTH_REQUIRED, isAuthRequired);
-        request.setAttribute(Constants.HANDLER_METHOD, requestMethodHandler);
+        request.setAttribute(Constants.STATIC_RESOURCE, path);
 
         return true;
     }
-
 
     /**
      * @param handler HandlerMethod
      * @return true if HandlerMethod is annotated with @Public
      */
-    private boolean isTheEndpointPublic(HandlerMethod handler) {
+    private boolean isHandlerMethodPublic(HandlerMethod handler) {
         return handler.getMethod().isAnnotationPresent(Public.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * remove the user from securityContext
+     */
+    @Override
+    public void postHandle(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler,
+            ModelAndView modelAndView) throws Exception {
+        SecurityContext.removeUser();
     }
 
     /**
@@ -70,27 +106,13 @@ public class IsAuthenticationRequiredHandler implements HandlerInterceptor {
      *                        or null if not exist a HandlerMethod for this request
      * @return an instance of HandlerMethod
      */
-    private HandlerMethod getRequestMethodHandler(Object supposedHandler) {
+    private Optional<HandlerMethod> getRequestMethodHandler(Object supposedHandler) {
         HandlerMethod handlerMethod = null;
         try {
             handlerMethod = (HandlerMethod) supposedHandler;
         } catch (Exception e) {
-            log.error("Cannot determine handler Method", e);
+            log.debug("Cannot determine handler Method", e);
         }
-        return handlerMethod;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * remove the user from securityContext
-     */
-    @Override
-    public void postHandle(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Object handler,
-            ModelAndView modelAndView) throws Exception {
-        SecurityContext.removeUser();
+        return Optional.ofNullable(handlerMethod);
     }
 }

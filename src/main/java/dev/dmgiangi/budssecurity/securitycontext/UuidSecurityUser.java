@@ -66,49 +66,37 @@ public class UuidSecurityUser implements SecurityUser {
         return mainIdentifier.toString();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getPassword() {
         return password;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public Collection<String> getAuthorities() {
         return authorities;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public Collection<String> getIdentifiers() {
         return identifiers;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isAccountNotExpired() {
         return accountNotExpired;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isAccountNotLocked() {
         return accountNotLocked;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
@@ -122,6 +110,11 @@ public class UuidSecurityUser implements SecurityUser {
         return verified;
     }
 
+    /**
+     * Getter for the field mainIdentifier.
+     *
+     * @return a {@link java.util.UUID} object
+     */
     public UUID getMainIdentifier() {
         return mainIdentifier;
     }
