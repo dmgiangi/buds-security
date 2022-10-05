@@ -32,7 +32,7 @@ public class SecurityContext {
     /**
      * getUser.
      *
-     * @return a {@link java.util.Optional}<{@link SecurityUser}> object
+     * @return a {@link java.util.Optional} of {@link SecurityUser} object
      */
     public static Optional<SecurityUser> getUser() {
         return Optional.ofNullable(SecurityContext.threadLocal.get());

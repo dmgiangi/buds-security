@@ -19,9 +19,9 @@ public interface StaticResourcesAuthorizationSetting {
     List<String> getPublicResourcesPath();
 
     /**
-     * Return a Map of String - List<String> where:
+     * Return a Map of String - List(String) where:
      * String is the path that require authorization
-     * List<String> contains the roles that have access granted to that resources
+     * List(String) contains the roles that have access granted to that resources
      *
      * @return a {@link java.util.Map} object
      */
