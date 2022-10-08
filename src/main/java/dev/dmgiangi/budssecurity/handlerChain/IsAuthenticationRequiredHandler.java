@@ -48,32 +48,37 @@ public class IsAuthenticationRequiredHandler implements HandlerInterceptor {
             HttpServletResponse response,
             Object supposedHandler
     ) throws Exception {
-        //Try to get the HandlerMethod injected by Spring
         Optional<HandlerMethod> requestMethodHandler = getRequestMethodHandler(supposedHandler);
+        String endpointPath = getResourcePath(request);
+        boolean existStaticPublicDefinition = this.isEndpointPathPublic(endpointPath);
 
-        //determine handlerMethod is public if requested resource is a handler method
-        if (requestMethodHandler.isPresent()) {
-            //Check if the handler method need Authentication and
-            boolean isAuthRequired = !isHandlerMethodPublic(requestMethodHandler.get());
-            request.setAttribute(Constants.IS_AUTH_REQUIRED, isAuthRequired);
+        if (requestMethodHandler.isPresent()) { // requested resource in a method
+            boolean existPublicAnnotation = isHandlerMethodPublic(requestMethodHandler.get());
+
+            request.setAttribute(
+                    Constants.IS_AUTH_REQUIRED,
+                    !(existPublicAnnotation || existStaticPublicDefinition));
             request.setAttribute(Constants.HANDLER_METHOD, requestMethodHandler.get());
 
             return true;
+        } else { //requested resource is static
+            request.setAttribute(Constants.IS_AUTH_REQUIRED, !existStaticPublicDefinition);
+            request.setAttribute(Constants.STATIC_RESOURCE, endpointPath);
         }
 
-        //determine if exist a public static resource that match the request
-        String path = request.getRequestURI().substring(
-                request.getContextPath().length());
+        return true;
+    }
 
-        boolean isAuthRequired = staticResourcesAuthorizationSetting
+    private boolean isEndpointPathPublic(String endpointPath) {
+        return staticResourcesAuthorizationSetting
                 .getPublicResourcesPath()
                 .stream()
-                .anyMatch(path::matches);
+                .anyMatch(endpointPath::matches);
+    }
 
-        request.setAttribute(Constants.IS_AUTH_REQUIRED, isAuthRequired);
-        request.setAttribute(Constants.STATIC_RESOURCE, path);
-
-        return true;
+    private String getResourcePath(HttpServletRequest request) {
+        return request.getRequestURI().substring(
+                request.getContextPath().length());
     }
 
     /**

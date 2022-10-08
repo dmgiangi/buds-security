@@ -1,0 +1,79 @@
+name: release
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      #set up java environment
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      #run test
+      - name: Run Test
+        run: |
+          mvn -B test --file pom.xml
+          MASTER_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version | sed -n -e '/^\[.*\]/ !{ /^[0-9]/ { p; q } }')
+          echo "master_version=$MASTER_VERSION" >> $GITHUB_ENV
+
+      - name: Create Package
+        run: |
+          mvn clean package -Djar.finalName=${{ github.event.repository.name }}
+
+      - name: Automatic Releases
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          # GitHub secret token
+          repo_token: ${{secrets.github_token}}
+          automatic_release_tag: ${{ env.master_version }}
+          draft: false
+          prerelease: false
+          title: "Buds Security ${{ env.master_version }}"
+          files: |
+            ./target/${{ github.event.repository.name }}-${{ env.master_version }}.jar
+            ./target/${{ github.event.repository.name }}-${{ env.master_version }}.pom
+            ./target/${{ github.event.repository.name }}-${{ env.master_version }}-javadoc.jar
+            ./target/${{ github.event.repository.name }}-${{ env.master_version }}-sources.jar
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: release
+    
+    steps:
+      - uses: actions/checkout@v3
+      #set up java environment
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - id: install-secret-key
+        name: Install gpg secret key
+        run: |
+          cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
+
+      - id: publish-to-central
+        name: Publish to Central Repository
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        run: |
+          mvn \
+            --no-transfer-progress \
+            --batch-mode \
+            -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
+            clean deploy
+        
+            

@@ -1,0 +1,47 @@
+name: check pull request version
+
+on:
+  pull_request:
+    branches: master
+
+jobs:
+  check_version:
+    name: check pull request version
+    
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # checkout master
+      - name: checkout master branch
+        uses: actions/checkout@v3.1.0
+        with:
+          repository: ${{ github.repository }}
+          ref: master
+
+      #set up java environment
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      # get master branch version
+      - name: checkout master version
+        run: |
+          MASTER_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version | sed -n -e '/^\[.*\]/ !{ /^[0-9]/ { p; q } }')
+          echo "master_version=$MASTER_VERSION" >> $GITHUB_ENV
+          echo "master_version=$MASTER_VERSION"
+
+      #Checkout pull request branch
+      - name: checkout pull request branch
+        uses: actions/checkout@v3.1.0
+        with:
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+
+      - name: get pull request version
+        run: |
+          MASTER_VERSION="${{ env.master_version }}"
+          source .github/scripts/version_controll.sh
