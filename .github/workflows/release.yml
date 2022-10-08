@@ -27,9 +27,8 @@ jobs:
 
       - name: Create Package
         run: |
-          mvn clean package -Djar.finalName=${{ github.event.repository.name }}
-          ls ./target
-
+          mvn clean package
+          
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@latest
         with:
@@ -41,7 +40,6 @@ jobs:
           title: "Buds Security ${{ env.master_version }}"
           files: |
             ./target/${{ github.event.repository.name }}-${{ env.master_version }}.jar
-            ./target/${{ github.event.repository.name }}-${{ env.master_version }}.pom
             ./target/${{ github.event.repository.name }}-${{ env.master_version }}-javadoc.jar
             ./target/${{ github.event.repository.name }}-${{ env.master_version }}-sources.jar
 
