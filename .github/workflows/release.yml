@@ -28,6 +28,7 @@ jobs:
       - name: Create Package
         run: |
           mvn clean package -Djar.finalName=${{ github.event.repository.name }}
+          ls ./target
 
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@latest
