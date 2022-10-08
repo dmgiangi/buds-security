@@ -64,7 +64,7 @@ jobs:
           gpg --list-secret-keys --keyid-format LONG
       
       - name: maven-settings-temporary
-        uses: InstaCode/maven-settings-xml-action@v9
+        uses: whelk-io/maven-settings-xml-action@v4
         with:
           servers: '[{ "id": "ossrh", "username": "${{ secrets.OSSRH_USERNAME }}", "password": "${{ secrets.OSSRH_TOKEN }}" }]'
           profiles: '[{ "id": "ossrh", "properties": { "gpg.executable": "gpg }, "activation" : { "activeByDefault": true } }]'
