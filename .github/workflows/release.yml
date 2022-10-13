@@ -22,17 +22,12 @@ jobs:
         run: |
           mvn -B test --file pom.xml
 
-      - name: Create Package
-        run: |
-          mvn clean package
-
       - uses: google-github-actions/release-please-action@v3
         with:
           release-type: maven
           package-name: release-please-action
-          extra-files: |
-            ./target/${{ github.event.repository.name }}-${{ env.master_version }}.jar
-            ./target/${{ github.event.repository.name }}-${{ env.master_version }}-javadoc.jar
-            ./target/${{ github.event.repository.name }}-${{ env.master_version }}-sources.jar
+
+      - uses: actions/checkout@v3
+        run: cat pom.xml
         
             
