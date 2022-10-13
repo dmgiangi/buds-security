@@ -5,12 +5,12 @@ on:
     branches: [ "master" ]
 
 jobs:
-  release:
+  test:
     runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v3
-      #set up java environment
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -18,27 +18,19 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      #run test
       - name: Run Test
         run: |
           mvn -B test --file pom.xml
-          MASTER_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version | sed -n -e '/^\[.*\]/ !{ /^[0-9]/ { p; q } }')
-          echo "master_version=$MASTER_VERSION" >> $GITHUB_ENV
 
       - name: Create Package
         run: |
           mvn clean package
-          
-      - name: Automatic Releases
-        uses: marvinpinto/action-automatic-releases@latest
+
+      - uses: google-github-actions/release-please-action@v3
         with:
-          # GitHub secret token
-          repo_token: ${{secrets.github_token}}
-          automatic_release_tag: ${{ env.master_version }}
-          draft: false
-          prerelease: false
-          title: "Buds Security ${{ env.master_version }}"
-          files: |
+          release-type: maven
+          package-name: release-please-action
+          extra-files: |
             ./target/${{ github.event.repository.name }}-${{ env.master_version }}.jar
             ./target/${{ github.event.repository.name }}-${{ env.master_version }}-javadoc.jar
             ./target/${{ github.event.repository.name }}-${{ env.master_version }}-sources.jar
