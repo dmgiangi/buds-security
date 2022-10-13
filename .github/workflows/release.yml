@@ -26,6 +26,7 @@ jobs:
         with:
           release-type: maven
           package-name: release-please-action
+          pull-request-title-pattern: release Buds-Security-${version}
 
       - uses: actions/checkout@v3
 
