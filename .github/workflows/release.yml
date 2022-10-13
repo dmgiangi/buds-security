@@ -28,6 +28,8 @@ jobs:
           package-name: release-please-action
 
       - uses: actions/checkout@v3
+
+      - name: Show new version
         run: cat pom.xml
         
             
